@@ -8,6 +8,7 @@ class park_management():
     price_for_adults = 0
     price_for_teenagers = 0
     price_for_children = 0
+    amount_collected = 0
 
     # function to set discount
 
@@ -45,33 +46,40 @@ class park_management():
                 price_after_discount = price_before_discount-((self.discount_for_children/100)*price_before_discount)
 
         print(f"Price to be paid {price_after_discount}")
-        while True:
-            payment = input("please complete your payment ")
-            if payment.lower() == 'success':
-                self.visitors.append(visitors_map)
-
-                print("Payment_successful! Welcome to the park")
-
-                break
-            else:
-                print("Retry payment")
+        print()
+        print("******Processing payment*******")
+        print()
+        print("Payment Successful! Welcome to the park ")
+        print()
+        print()
+        print()
+        self.visitors.append(visitors_map)
 
     # function to display prices
 
     def display_prices(self):
-        print(f"price for people below 10: {self.price_for_children}")
-        print(f"Price for people between 10 to 20: {self.price_for_teenagers}")
-        print(f"Price for people above 20: {self.price_for_adults}")
+        print(f"price for people below 10 years: {self.price_for_children}")
+        print(f"Price for people between 10 to 20 years: {self.price_for_teenagers}")
+        print(f"Price for people above 20 years: {self.price_for_adults}")
+        print()
+        print()
+        print()
 
     # function to display discounts
     def display_discounts(self):
-        print(f"There is a discount of {self.discount_for_men}/% /for all mens")
-        print(f"There is a discount of {self.discount_for_women}/% /for all women")
-        print(f"There is a discount of {self.discount_for_children}/% /for all children below 20")
+        print(f"There is a discount of {self.discount_for_men}% for all mens")
+        print(f"There is a discount of {self.discount_for_women}% for all women")
+        print(f"There is a discount of {self.discount_for_children}% for all children below 20")
+        print()
+        print()
+        print()
 
     # function to see number of visitors
     def visitors_count(self):
         print(f"Total visitors in the park: {len(self.visitors)}")
+        print()
+        print()
+        print()
 
 
 def main():
@@ -81,20 +89,55 @@ def main():
     park_system.set_price(500, 300, 100)
 
     # user panel
-    print("Enter 1 for booking")
-    print("Enter 2 to view prices")
-    print("Enter 3 to view offers")
-    print("Enter 4 to see number of visitors")
 
     while True:
+        print("1. booking", end="      ")
+        print("2. view prices", end="       ")
+        print("3. view offers", end="       ")
+        print("4. see number of visitors", end="        ")
+        print("5. exit")
         user_choice = int(input("Enter your choice "))
-        if user_choice == 1:
-            name = input("Enter your name ")
-            age = int(input("Enter your age "))
-            phone = input("Enter your phone number ")
-            gender = input("Enter your gender ")
+        print()
+        print()
+        print()
 
-            park_system.book_ticket(name, age, phone, gender.lower())
+        if user_choice == 1:
+            name = input("Enter your name: ")
+            age = int(input("Enter your age: "))
+            if age < 0:
+                print()
+                print("Enter valid age")
+                print()
+                print("Enter your details again")
+                print()
+                print()
+                print()
+                continue
+
+            phone = input("Enter your phone number: ")
+            if len(phone) != 10:
+                print()
+                print("Enter a valid phone number")
+                print()
+                print("Enter your details again")
+                print()
+                print()
+                print()
+                continue
+            gender = input("Enter your gender (male/female): ")
+            if gender == 'male' or gender == 'female':
+                print()
+                park_system.book_ticket(name, age, phone, gender.lower())
+
+            else:
+                print()
+                print("Please enter your gender in the given format only")
+                print()
+                print("Enter your details again")
+                print()
+                print()
+                print()
+                continue
 
         elif user_choice == 2:
             park_system.display_prices()
@@ -105,7 +148,7 @@ def main():
         elif user_choice == 4:
             park_system.visitors_count()
 
-        else:
+        elif user_choice == 5:
             break
 
 
